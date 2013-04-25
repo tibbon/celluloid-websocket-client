@@ -12,7 +12,7 @@ module Celluloid
           uri = URI.parse(url)
           port = uri.port || (uri.scheme == "ws" ? 80 : 443)
           @socket = Celluloid::IO::TCPSocket.new(uri.host, port)
-          @client = ::WebSocket::Protocol.client(self)
+          @client = ::WebSocket::Protocol.client(self, origin: 'ws://websocket.mtgox.com:80')
           @handler = handler
 
           async.run
