@@ -20,13 +20,13 @@ module Celluloid
         attr_reader :url
 
         def run
-          @client.onopen do |event|
+          @client.on_open do |event|
             @handler.async.on_open if @handler.respond_to?(:on_open)
           end
-          @client.onmessage do |event|
+          @client.on_message do |event|
             @handler.async.on_message(event.data) if @handler.respond_to?(:on_message)
           end
-          @client.onclose do |event|
+          @client.on_close do |event|
             @handler.async.on_close(event.code, event.reason) if @handler.respond_to?(:on_close)
           end
 
